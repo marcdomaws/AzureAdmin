@@ -1,0 +1,7 @@
+Install Powershell 7.0 on Local Machine
+
+
+Install-Module -Name Az -Allow Clobber –Force
+Get-InstalledModule -Name Az
+
+Connect-AzAccount
