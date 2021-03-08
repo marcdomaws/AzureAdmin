@@ -1,0 +1,5 @@
+watch -d -n 5 "az vm list \
+    --resource-group learn-bc546815-fdd3-4183-9840-5c2f2cb468de \
+    --show-details \
+    --query '[*].{Name:name, ProvisioningState:provisioningState, PowerState:powerState}' \
+    --output table"
