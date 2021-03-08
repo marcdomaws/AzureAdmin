@@ -1,0 +1,63 @@
+
+Create VNET For Each Department
+
+az network vnet create \
+    --resource-group learn-bc546815-fdd3-4183-9840-5c2f2cb468de \
+    --name SalesVNet \
+    --address-prefix 10.1.0.0/16 \
+    --subnet-name Apps \
+    --subnet-prefix 10.1.1.0/24 \
+    --location northeurope
+    
+    
+    az network vnet create \
+    --resource-group learn-bc546815-fdd3-4183-9840-5c2f2cb468de \
+    --name MarketingVNet \
+    --address-prefix 10.2.0.0/16 \
+    --subnet-name Apps \
+    --subnet-prefix 10.2.1.0/24 \
+    --location northeurope
+    
+    
+    az network vnet create \
+    --resource-group learn-bc546815-fdd3-4183-9840-5c2f2cb468de \
+    --name MarketingVNet \
+    --address-prefix 10.2.0.0/16 \
+    --subnet-name Apps \
+    --subnet-prefix 10.2.1.0/24 \
+    --location northeurope
+    
+    
+    Configure VNET PEERING
+    
+    az network vnet peering create \
+    --name SalesVNet-To-MarketingVNet \
+    --remote-vnet MarketingVNet \
+    --resource-group learn-bc546815-fdd3-4183-9840-5c2f2cb468de \
+    --vnet-name SalesVNet \
+    --allow-vnet-access
+    
+    
+    az network vnet peering create \
+    --name MarketingVNet-To-SalesVNet \
+    --remote-vnet SalesVNet \
+    --resource-group learn-bc546815-fdd3-4183-9840-5c2f2cb468de \
+    --vnet-name MarketingVNet \
+    --allow-vnet-access
+    
+    Check the virtual network peering connections
+
+    az network vnet peering list \
+    --resource-group learn-bc546815-fdd3-4183-9840-5c2f2cb468de \
+    --vnet-name SalesVNet \
+    --output table
+    
+    Check effective routes
+
+    az network nic show-effective-route-table \
+    --resource-group learn-bc546815-fdd3-4183-9840-5c2f2cb468de \
+    --name SalesVMVMNic \
+    --output table
+    
+    
+    
